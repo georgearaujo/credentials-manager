@@ -4,9 +4,11 @@ import org.springframework.http.HttpStatus;
 
 public enum ExceptionResponse {
 
-    INVALID_LOGIN("LOGIN-001", "Login inválido.", HttpStatus.BAD_REQUEST),
+    INVALID_USERNAME("USER-001", "Invalid username.", HttpStatus.BAD_REQUEST),
+    INVALID_PASSWORD("USER-002", "Invalid password.", HttpStatus.BAD_REQUEST),
+    INVALID_EMAIL("USER-003", "Invalid email.", HttpStatus.BAD_REQUEST),
 
-    GENERIC_ERROR("ERROR-999", "Exception: %s", HttpStatus.INTERNAL_SERVER_ERROR);
+    GENERIC_ERROR("ERROR-999", "%s", HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final String code;
     private final String description;
