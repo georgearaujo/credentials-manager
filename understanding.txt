@@ -1,0 +1,26 @@
+User has
+	uuid
+  	login
+	password
+	email
+	profile
+
+Token has
+	token
+	refresh-token
+	token-temp
+	refresh-token-temp
+
+Functions - default
+	login / generate-token
+	logout / invalidate-token
+	reset-password
+	update-password
+	refresh-token	
+	validate-token
+
+Functions - admin
+	block-login
+	unblock-login
+	validate-email
+	delete-login
