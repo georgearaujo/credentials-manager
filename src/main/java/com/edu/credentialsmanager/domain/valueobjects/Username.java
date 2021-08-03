@@ -1,21 +1,21 @@
 package com.edu.credentialsmanager.domain.valueobjects;
 
-import com.edu.credentialsmanager.domain.exception.InvalidLoginException;
+import com.edu.credentialsmanager.domain.exception.InvalidUsernameException;
 
 import java.util.regex.Pattern;
 
-public class Login {
-    private static final Pattern VALID_LOGIN_REGEX =
-            Pattern.compile("/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/",
+public class Username {
+    private static final Pattern VALID_USERNAME_REGEX =
+            Pattern.compile("^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$",
                     Pattern.CASE_INSENSITIVE);
 
     private String value;
 
-    public Login(String value) {
+    public Username(String value) {
         this.value = value != null ? value : "";
-        var matcher = VALID_LOGIN_REGEX.matcher(value);
+        var matcher = VALID_USERNAME_REGEX.matcher(value);
         if(!matcher.find()) {
-            throw new InvalidLoginException();
+            throw new InvalidUsernameException();
         }
     }
 
@@ -30,7 +30,7 @@ public class Login {
 
     @Override
     public boolean equals(Object o) {
-        var login = (Login) o;
+        var login = (Username) o;
         return login != null && this.value.equals(login.getValue());
     }
 }
