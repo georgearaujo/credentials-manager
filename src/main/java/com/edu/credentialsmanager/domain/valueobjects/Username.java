@@ -1,6 +1,6 @@
 package com.edu.credentialsmanager.domain.valueobjects;
 
-import com.edu.credentialsmanager.domain.exception.InvalidUsernameException;
+import com.edu.credentialsmanager.domain.exception.UsernameFormatIsInvalidException;
 
 import java.util.regex.Pattern;
 
@@ -9,13 +9,13 @@ public class Username {
             Pattern.compile("^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$",
                     Pattern.CASE_INSENSITIVE);
 
-    private String value;
+    private final String value;
 
     public Username(String value) {
         this.value = value != null ? value : "";
         var matcher = VALID_USERNAME_REGEX.matcher(value);
         if(!matcher.find()) {
-            throw new InvalidUsernameException();
+            throw new UsernameFormatIsInvalidException();
         }
     }
 
@@ -25,12 +25,12 @@ public class Username {
 
     @Override
     public String toString() {
-        return value;
+        return this.getValue();
     }
 
     @Override
     public boolean equals(Object o) {
         var login = (Username) o;
-        return login != null && this.value.equals(login.getValue());
+        return login != null && this.getValue().equals(login.getValue());
     }
 }

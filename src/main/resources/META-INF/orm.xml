@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
+
+    <entity class="com.edu.credentialsmanager.domain.entities.User"
+        access="FIELD">
+        <table name="user" />
+        <attributes>
+            <id name="uuid">
+                <generated-value strategy="AUTO" />
+            </id>
+            <embedded name="username"></embedded>
+            <embedded name="email"></embedded>
+            <embedded name="password"></embedded>
+        </attributes>
+    </entity>
+
+    <embeddable class="com.edu.credentialsmanager.domain.valueobjects.Username">
+        <attributes>
+            <basic name="value">
+                <column name="username" length="255" nullable="false" />
+            </basic>
+            <transient name="minSize" />
+            <transient name="maxSize" />
+            <transient name="minNumberOfWords" />
+            <transient name="maxNumberOfWords" />
+        </attributes>
+    </embeddable>    
+
+    <embeddable class="com.edu.credentialsmanager.domain.valueobjects.Email">
+        <attributes>
+            <basic name="value">
+                <column name="email" length="255" nullable="false" />
+            </basic>
+        </attributes>
+    </embeddable>    
+
+    <embeddable class="com.edu.credentialsmanager.domain.valueobjects.Password">
+        <attributes>
+            <basic name="value">
+                <column name="password" length="255" nullable="false" />
+            </basic>
+            <transient name="raw" />
+        </attributes>
+    </embeddable>    
+
+</entity-mappings>

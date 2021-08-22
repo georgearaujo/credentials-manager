@@ -1,6 +1,6 @@
 package com.edu.credentialsmanager.domain.valueobjects;
 
-import com.edu.credentialsmanager.domain.exception.InvalidPasswordException;
+import com.edu.credentialsmanager.domain.exception.PasswordFormatIsInvalidException;
 
 import java.util.regex.Pattern;
 
@@ -9,13 +9,13 @@ public class Password {
             Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$",
                     Pattern.CASE_INSENSITIVE);
 
-    private String value;
+    private final String value;
 
     public Password(String value) {
         this.value = value != null ? value : "";
         var matcher = VALID_PASSWORD_REGEX.matcher(this.value);
         if(!matcher.find()) {
-            throw new InvalidPasswordException();
+            throw new PasswordFormatIsInvalidException();
         }
     }
 
@@ -31,6 +31,6 @@ public class Password {
     @Override
     public boolean equals(Object o) {
         var password = (Password) o;
-        return password != null && this.value.equals(password.getValue());
+        return password != null && this.getValue().equals(password.getValue());
     }
 }
